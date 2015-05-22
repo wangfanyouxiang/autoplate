@@ -1,0 +1,35 @@
+{
+	"id": "b3ace6fd-e2f5-323c-ec04-97858e333092",
+	"name": "GoogleMap",
+	"description": "",
+	"order": [
+		"51e2b777-9beb-7432-106b-05f11be5166d"
+	],
+	"folders": [],
+	"timestamp": 1419837737148,
+	"synced": false,
+	"remoteLink": "",
+	"requests": [
+		{
+			"id": "51e2b777-9beb-7432-106b-05f11be5166d",
+			"headers": "",
+			"url": "https://maps.googleapis.com/maps/api/staticmap?center=37.5181,-122.2917&zoom=11&size=200x200",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "https://maps.googleapis.com/maps/api/staticmap?center=37.5181,-122.2917&zoom=11&size=200x200",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1419840892087,
+			"version": 2,
+			"responses": [],
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Content-Type is image/png\"] = postman.getResponseHeader(\"Content-Type\").has(\"image/png\");\ntests[\"Server is staticmap\"] = postman.getResponseHeader(\"server\").has(\"staticmap\");",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "b3ace6fd-e2f5-323c-ec04-97858e333092",
+			"synced": false
+		}
+	]
+}

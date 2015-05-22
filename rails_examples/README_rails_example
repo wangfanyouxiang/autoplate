@@ -1,0 +1,33 @@
+ruby/jruby notes:
+
+install rvm: curl -L https://get.rvm.io | bash -s stable
+rvm install ruby
+rvm install jruby
+rvm use ruby (or rvm use jruby)
+
+jruby extra notes:
+
+Download the Oracle JCE_Policy lib: http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+unzip and read tne README file on instruction.
+
+phantomjs general notes:
+
+download phantomjs and install/copy in a PATH directory.
+mac osx can use "brew install phantomjs"
+
+project commandline note:
+
+bundle install
+rake db:migrate RAILS_ENV=test
+rake spec
+rake ci:setup:rspec spec (JUnit style report)
+
+project gradle node:
+
+gradle bundleInstall
+gradke rakeDB
+gradle rakeSpec
+gradle rakeReport (Junit style report)
+
+JUnit style reports are under spec/reports/ directory
+

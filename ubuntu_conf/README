@@ -1,0 +1,9 @@
+xvfb.conf sets up a virtual framebuffer at DISPLAY :10. this will be useful for test that requires DISPLAY, such as selenium_examples, and rails_examples if the JS driver is set to any real browser.
+sudo cp xvfb.conf /etc/init
+the Xvfb process should run the next time the system is rebooted.
+To manually control this serivce:
+sudo service xvfb start
+sudo service xvfb stop
+
+don't forget to export DISPLAY=:10
+put this line to the .bash_profile of jenkins, which will allow CI to use DISPLAY :10.

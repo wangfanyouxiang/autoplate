@@ -1,0 +1,23 @@
+[
+{
+	"url": "http://www.twitter.com/a85",
+	"user_id": 1,
+	"token_id": 123123123,
+	"username": "abhinav",
+	"password": "abc"
+},
+{
+	"url": "http://www.twitter.com/sobtiankit",
+	"user_id": 2,
+	"token_id": 899899,
+	"username": "ankit",
+	"password": "def"
+},
+{
+	"url": "http://www.twitter.com/abhijitkane",
+	"user_id": 3,
+	"token_id": 456123123,
+	"username": "abhijit",
+	"password": "xyz"
+}
+]

@@ -1,0 +1,69 @@
+task useJRuby (type: Exec) {
+    workingDir '.'
+    executable 'rvm'
+    args 'use', 'jruby'
+}
+
+task useRuby (type: Exec) {
+    workingDir '.'
+    executable 'rvm'
+    args 'use', 'ruby'
+}
+
+task gemBundle (type: Exec) {
+    workingDir '.'
+    commandLine 'gem', 'install', 'bundle'
+}
+
+task gemRake (type: Exec) {
+    workingDir '.'
+    commandLine 'gem', 'install', 'rake'
+}
+
+task gemRspec (type: Exec) {
+    workingDir '.'
+    commandLine 'gem', 'install', 'rspec'
+}
+
+task gemRails (type: Exec) {
+    workingDir '.'
+    commandLine 'gem', 'install', 'rails'
+}
+
+task bundleInstall (type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'install'
+}
+
+task bundleUpdate (type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'update'
+}
+
+task rakeDB (type:Exec) {
+    workingDir '.'
+    executable 'rake'
+    args 'db:migrate', 'RAILS_ENV=test'
+}
+
+task setupProj {
+    dependsOn gemBundle
+    dependsOn gemRake
+    dependsOn gemRspec
+    dependsOn gemRails
+    dependsOn bundleInstall
+    dependsOn bundleUpdate
+    dependsOn rakeDB
+}
+
+task rakeReport (type: Exec) {
+    workingDir '.'
+    executable 'rake'
+    args 'ci:setup:rspec', 'spec'
+}
+
+task rakeSpec (type: Exec) {
+    workingDir '.'
+    executable 'rake'
+    args 'spec'
+}

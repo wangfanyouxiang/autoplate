@@ -1,0 +1,59 @@
+apply plugin: 'java'
+ 
+sourceSets.main.java.srcDirs = []
+sourceSets.test.java.srcDirs = ['src/test/java/']
+
+repositories {
+    mavenCentral()
+}
+ 
+dependencies {
+    testCompile 'junit:junit:4.+'
+}
+ 
+task Test {
+    dependsOn 'createTests'
+    dependsOn 'test'
+}
+ 
+task Clean {
+    dependsOn 'clean'
+    dependsOn 'deleteTests'
+}
+
+def packages = 10
+def tests = 30
+
+task createTests<<{
+    (0..packages).each { packageCounter ->
+        def packageName = "gradletest${packageCounter}"
+        (0..tests).each { classCounter ->
+            def testClassName = "Gradle${classCounter}Test"
+            copy {
+                from 'src/templates'
+                into 'src/test/java'
+                expand([packageName: packageName, testClassName: testClassName])
+                rename '(.*).java', packageName + '/' + testClassName + '.java'
+                include 'SampleTest.java'
+            }
+        }
+    }
+}
+
+task deleteTests<<{
+    (0..packages).each { packageCounter ->
+        def packageName = "gradletest${packageCounter}"
+        delete 'src/test/java/' + packageName
+    }
+}
+
+test {
+  // faile test case will break the build
+  ignoreFailures = false
+
+  // always run re-test
+  outputs.upToDateWhen { false }
+
+  // run test in parallel
+  maxParallelForks = Runtime.runtime.availableProcessors() * 4
+}

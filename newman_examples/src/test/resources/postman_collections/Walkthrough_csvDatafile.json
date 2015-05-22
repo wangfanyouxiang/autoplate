@@ -1,0 +1,88 @@
+{
+	"id": "15bca190-2d9f-8f4b-2523-ef37ef317b43",
+	"name": "Walkthrough - Data files",
+	"description": "Sample use cases for using data files inside the Collection Runner.",
+	"order": [
+		"8c14c1f2-c1c0-dfd3-89f8-4d6017d8066b",
+		"339ce5a0-7003-8629-53c4-3eac8a87ffa0"
+	],
+	"folders": [],
+	"timestamp": 1414241353864,
+	"synced": false,
+	"requests": [
+		{
+			"id": "339ce5a0-7003-8629-53c4-3eac8a87ffa0",
+			"headers": "",
+			"url": "http://dump.getpostman.com/post",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "url",
+					"value": "{{url}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "{{username}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "{{password}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Body contains url\"] = responseBody.has(data['url']);\ntests[\"Body contains password\"] = responseBody.has(data['password']);\ntests[\"Body contains username\"] = responseBody.has(data.username);",
+			"time": 1414243325898,
+			"name": "Post username",
+			"description": "",
+			"collectionId": "15bca190-2d9f-8f4b-2523-ef37ef317b43",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "8c14c1f2-c1c0-dfd3-89f8-4d6017d8066b",
+			"headers": "",
+			"url": "http://dump.getpostman.com/get?username={{username}}&password={{password}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "url",
+					"value": "{{url}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "{{username}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "{{password}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Body contains password\"] = responseBody.has(data['password']);\ntests[\"Body contains username\"] = responseBody.has(data.username);",
+			"time": 1414243203351,
+			"name": "Get username",
+			"description": "",
+			"collectionId": "15bca190-2d9f-8f4b-2523-ef37ef317b43",
+			"responses": [],
+			"synced": false
+		}
+	]
+}

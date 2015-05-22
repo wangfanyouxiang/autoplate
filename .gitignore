@@ -1,0 +1,8 @@
+.idea/
+.gradle/
+*.swp
+*.log
+*.iml
+target/
+build/
+node_modules/

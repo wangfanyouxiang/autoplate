@@ -1,0 +1,80 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+def package_name = 'selenium_examples'
+def package_path = 'com.qeautos'
+def package_fullname = package_path + '.' + package_name
+def package_fullpath = package_fullname.replaceAll(/\./, '/')
+
+version = '1.0'
+
+defaultTasks 'LibJar'
+
+task LibJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': package_fullname,
+                   'Implementation-Version': version
+    }
+    baseName = package_name + '-LibJar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-io:commons-io:2.4'
+    compile 'log4j:log4j:1.2.+'
+    compile files('lib/selenium-server-standalone-2.44.0.jar')
+
+    testCompile 'org.testng:testng:6.8.+'
+    testCompile 'junit:junit:4.+'
+}
+
+sourceSets.main.java.srcDirs = ['src/main/']
+sourceSets.test.java.srcDirs = ['src/test/']
+
+test {
+  // enable TestNG support (default is JUnit)
+  useTestNG() {
+    useDefaultListeners = true
+  }
+
+  // failed test case will break the build
+  ignoreFailures = false
+
+  // always run re-test
+  outputs.upToDateWhen { false }
+
+  // set a system property for the test JVM(s)
+  //systemProperty 'some.prop', 'value'
+
+  // explicitly include or exclude tests
+  //include 'com/qeautos/**'
+  //exclude 'org/boo/**'
+
+  // show standard out and standard error of the test JVM(s) on the console
+  testLogging.showStandardStreams = true
+
+  // set heap size for the test JVM(s)
+  minHeapSize = "128m"
+  maxHeapSize = "512m"
+
+  // set JVM arguments for the test JVM(s)
+  //jvmArgs '-XX:MaxPermSize=256m'
+
+  // listen to events in the test execution lifecycle
+  beforeTest { descriptor ->
+     logger.lifecycle("Running test: " + descriptor)
+  }
+
+  // listen to standard out and standard error of the test JVM(s)
+  onOutput { descriptor, event ->
+     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+  }
+}
